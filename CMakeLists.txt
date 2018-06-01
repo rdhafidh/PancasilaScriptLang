@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 2.8.12)
 project(panca1)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
 set(ANTLR_HOMEDIR "")
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
