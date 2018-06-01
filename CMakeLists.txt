@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-project(panca1)
+project(pancasilaScript)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(ANTLR_HOMEDIR "")
