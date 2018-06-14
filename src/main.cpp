@@ -1,5 +1,5 @@
 #include <antlr4-runtime.h> 
-#include <generated/PancasilaScriptLangParser.h>
+#include <testparsing.h>
 
 int main(int argc, char *argv[])
 { 
