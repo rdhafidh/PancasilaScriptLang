@@ -1,6 +1,6 @@
 #include "parsererrorlistener.h"
 #include <Exceptions.h>
-#include <sstream> 
+#include <sstream>
 ParserErrorListener::ParserErrorListener() {}
 
 ParserErrorListener::~ParserErrorListener() {}
