@@ -24,7 +24,7 @@ file(GLOB libantlrcpp_SRC
 )
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-  add_definitons( "/wd4251")
+  add_definitions( "/wd4251")
 else()
   add_definitions( "-Wno-overloaded-virtual")
 endif ()

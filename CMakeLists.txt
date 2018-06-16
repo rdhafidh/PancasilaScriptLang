@@ -41,7 +41,11 @@ endif()
 add_subdirectory(lib)
 
 if(NOT APPLE)
- set(ANTLR_LIB ${ANTLR_LIB} localuuid antlr4_static pancalib) 
+ if(WIN32)
+  set(ANTLR_LIB ${ANTLR_LIB} antlr4_static pancalib)  
+ else()
+  set(ANTLR_LIB ${ANTLR_LIB} localuuid antlr4_static pancalib) 
+ endif()
 else()
 #fixme : On Apple platform
  find_package(COREFOUNDATION_LIBRARY CoreFoundation REQUIRED)

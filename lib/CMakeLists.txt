@@ -1,3 +1,5 @@
+if (CMAKE_SYSTEM_NAME STREQUAL Linux)
 add_subdirectory(libuuid)
+endif()
 add_subdirectory(antlr)
 add_subdirectory(pancalib)
