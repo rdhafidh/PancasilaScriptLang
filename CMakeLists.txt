@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 
 project(pancasilaScript)
 
+option(GENERATE_PANCALIB "Generate PancasilaScript Lexer and Parser at build time. Require working java runtime 1.7+. Default is ON" ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(ANTLR_HOMEDIR "")
 set(CMAKE_CXX_STANDARD 17)
@@ -14,21 +15,12 @@ set(ROOT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(ANTLR_JAR_DIR ${CMAKE_CURRENT_SOURCE_DIR}/antlr4.jar)
 set(GRAMMAR_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/${grammarfname}.g4  ${CMAKE_CURRENT_SOURCE_DIR}/${grammarfname}Lexer.g4)
 
-find_package(Java COMPONENTS Runtime REQUIRED)
-set(ANTLR_INCLUDE_DIRS "")
-set(ANTLR_LIB "") 
+if(GENERATE_PANCALIB)
+  find_package(Java COMPONENTS Runtime REQUIRED)
+endif(GENERATE_PANCALIB)
 
-if(WIN32)
-    SET(ANTLR_HOMEDIR "D:/masteraplikasi/transferh11nov/antlrgit/msvc")
-    IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        SET (ANTLR_LIB ${ANTLR_HOMEDIR}/debug/lib/antlr4-runtime-static.lib)
-        SET (ANTLR_INCLUDE_DIRS ${ANTLR_HOMEDIR}/debug/include ${ANTLR_HOMEDIR}/debug/include/antlr4-runtime)
-    endif ()
-    if(CMAKE_BUILD_TYPE STREQUAL "Release")
-        SET (ANTLR_LIB ${ANTLR_HOMEDIR}/release/lib/antlr4-runtime-static.lib)    
-        SET (ANTLR_INCLUDE_DIRS ${ANTLR_HOMEDIR}/release/include ${ANTLR_HOMEDIR}/release/include/antlr4-runtime)
-    ENDIF()
-endif(WIN32) 
+set(ANTLR_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/lib/antlr/runtime/Cpp/runtime/src)
+set(ANTLR_LIB "")
 
 include_directories (${ANTLR_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
 
@@ -37,6 +29,24 @@ if(MSVC)
 	add_definitions(-D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING)
 endif(MSVC)
 
+if(CMAKE_CXX_COMPILER_ID STREQUAL Clang)
+ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+ add_definitions(-Wno-extra-tokens)
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+ set(ANTLR_LIB ${ANTLR_LIB} pthread)
+endif()
+
 add_subdirectory(lib)
+
+if(NOT APPLE)
+ set(ANTLR_LIB ${ANTLR_LIB} localuuid antlr4_static pancalib) 
+else()
+#fixme : On Apple platform
+ find_package(COREFOUNDATION_LIBRARY CoreFoundation REQUIRED)
+ set(ANTLR_LIB ${ANTLR_LIB} localuuid antlr4_static pancalib ${COREFOUNDATION_LIBRARY})
+endif(NOT APPLE)
+
 add_subdirectory(src)
 add_subdirectory(test)

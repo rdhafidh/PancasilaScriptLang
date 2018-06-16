@@ -1,0 +1,27 @@
+UUID generate = 9481fa89-224b-42a0-b90f-95710a609737
+UUID: 9481fa89224b42a0b90f95710a609737
+UUID type = 4, UUID variant = 1
+
+UUID random string = d25b31cf-d953-4dda-94f9-220a21c05c4e
+UUID: d25b31cfd9534dda94f9220a21c05c4e
+UUID type = 4, UUID variant = 1
+
+UUID string = 7edcd6d8-711c-11e8-8e00-87b4e2856754
+UUID time: 7edcd6d8711c11e88e0087b4e2856754
+UUID type = 1, UUID variant = 1
+UUID time is: (1529122783, 622524): Sat Jun 16 11:19:43 2018
+
+UUID parse and compare succeeded.
+UUID clear and is null succeeded.
+UUID copy and compare succeeded.
+84949cc5-4701-4a84-895b-354c584a981b is valid, OK
+84949CC5-4701-4A84-895B-354C584A981B is valid, OK
+84949cc5-4701-4a84-895b-354c584a981bc is invalid, OK
+84949cc5-4701-4a84-895b-354c584a981 is invalid, OK
+84949cc5x4701-4a84-895b-354c584a981b is invalid, OK
+84949cc504701-4a84-895b-354c584a981b is invalid, OK
+84949cc5-470104a84-895b-354c584a981b is invalid, OK
+84949cc5-4701-4a840895b-354c584a981b is invalid, OK
+84949cc5-4701-4a84-895b0354c584a981b is invalid, OK
+g4949cc5-4701-4a84-895b-354c584a981b is invalid, OK
+84949cc5-4701-4a84-895b-354c584a981g is invalid, OK

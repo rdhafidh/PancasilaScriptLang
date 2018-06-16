@@ -1,7 +1,7 @@
 set (TEST_SRC parsertest.cpp)
 include_directories( 
 	${CMAKE_CURRENT_SOURCE_DIR}/lib ${CMAKE_CURRENT_SOURCE_DIR}/lib/include
-	${ROOT_SRC_DIR}/lib
+	${ROOT_SRC_DIR}/lib/pancalib
 )
 
 add_executable( testing ${TEST_SRC} ${CMAKE_CURRENT_SOURCE_DIR}/lib/src/gtest-all.cc)
