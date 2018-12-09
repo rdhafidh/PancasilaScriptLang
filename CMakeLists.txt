@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 
 project(pancasilaScript)
 
-option(GENERATE_PANCALIB "Generate PancasilaScript Lexer and Parser at build time. Require working java runtime 1.7+. Default is ON" ON)
+option(GENERATE_PANCALIB "Generate PancasilaScript Lexer and Parser at build time. Require working java runtime 1.7+. Default is ON" ON) 
+ 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(ANTLR_HOMEDIR "")
 set(CMAKE_CXX_STANDARD 17)
@@ -13,7 +14,7 @@ SET(grammarfname ${PACKAGE_LANGNAME})
 set(ROOT_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set(ANTLR_JAR_DIR ${CMAKE_CURRENT_SOURCE_DIR}/antlr4.jar)
-set(GRAMMAR_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/${grammarfname}.g4  ${CMAKE_CURRENT_SOURCE_DIR}/${grammarfname}Lexer.g4)
+set(GRAMMAR_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/${grammarfname}.g4  )
 
 if(GENERATE_PANCALIB)
   find_package(Java COMPONENTS Runtime REQUIRED)
@@ -29,8 +30,11 @@ if(MSVC)
 	add_definitions(-D_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING -D_CRT_SECURE_NO_WARNINGS)
 endif(MSVC)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL Clang)
- set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+if(MSVC AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+   add_definitions (-D_DEBUG)
+endif()
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL Clang) 
  add_definitions(-Wno-extra-tokens)
 endif()
 
@@ -49,7 +53,7 @@ if(NOT APPLE)
 else()
 #fixme : On Apple platform
  find_package(COREFOUNDATION_LIBRARY CoreFoundation REQUIRED)
- set(ANTLR_LIB ${ANTLR_LIB} localuuid antlr4_static pancalib ${COREFOUNDATION_LIBRARY})
+ set(ANTLR_LIB ${ANTLR_LIB} antlr4_static pancalib ${COREFOUNDATION_LIBRARY})
 endif(NOT APPLE)
 
 add_subdirectory(src)

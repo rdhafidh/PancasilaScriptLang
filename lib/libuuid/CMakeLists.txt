@@ -1,6 +1,3 @@
-project(local_test_uuid)
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-
 set(UUID_SRC
 clear.c
 compare.c

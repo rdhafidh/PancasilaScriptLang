@@ -26,7 +26,7 @@ ParseTestingResult TestParsing::testParsing(const std::string &buffer) {
     pr.is_ok_parsing = true;
   } catch (std::exception &e) {
     pr.is_ok_parsing = false;
-    pr.error_msg = e.what();
+    pr.error_msg = e.what(); 
   }
   return pr;
 }
